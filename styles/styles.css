@@ -1,0 +1,20 @@
+#main-page-text {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+.container {
+    background-image: url("/images/blue_backdrop.gif");
+    height: 100vh;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: fixed;
+
+}
+
+.col {
+color: white ;
+}
