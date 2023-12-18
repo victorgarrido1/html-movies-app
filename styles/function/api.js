@@ -18,9 +18,8 @@ async function fetchApi(url, options) {
 
   }
 }
-
 // Get Movie Title from HTML Field
-let title = document.getElementById('title').value;
+let movieSearch = document.getElementById("scr-movie-btn").value;
 
 // Clean Movie Title
 title = title.trim();
