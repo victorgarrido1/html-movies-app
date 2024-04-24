@@ -102,10 +102,10 @@ async function handleButtonClick() {
     // Process the API result as needed here...
   } catch (error) {
     console.error('Error:', error);
+    
     // Handle errors here...
   }
 }
-
 
 
 // Attach the handleButtonClick function to the button click event
@@ -114,7 +114,7 @@ const button = document.getElementById('scr-movie-btn'); // Replace 'your-button
 button.addEventListener('click', handleButtonClick);
 
 searchInput.addEventListener('input', () => {
-  console.log(searchInput)
+  console.log('User input:', userInput)
   let userInput = searchInput.value.trim();
 });
 
