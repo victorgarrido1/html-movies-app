@@ -1,5 +1,5 @@
-let movieTitle = document.getElementById("movie-title");
-let movieDesc = document.getElementById("movie-description");
+// let movieTitle = document.getElementById("movie-title");
+// let movieDesc = document.getElementById("movie-description");
 
 // This section will allow us to display data to the user
 const options = {
@@ -27,28 +27,34 @@ async function getTrendingFilms() {
     // Parse response data as JSON
     const data = await response.json();
 
+    // 
+    const results = data.results
+    console.log(results)
+
+    const titleElement = document.getElementById("movie-title");
+    const overviewElement = document.getElementById("movie-description")
     
-
-    // Extracting movie title
-    let movieTitleE = data.results[0].title;
-    for (let i = 1; i < data.results.length; i++) {
-      movieTitleE += ", " + data.results[i].title;
-
-     movieTitle.append("movieTitle") 
-  }
+    // Iterate through the first 6 movies and display their titles
+    for (let i = 0; i < results.length; i++) {
+      // Create a new div element for each movie title
+      console.log(results[i].original_title)
 
 
-    // Display the movie title (for now, just log it to the console)
-    console.log("Movie Title:", movieTitle);
+      // Set the inner HTML of the div to the original title of the movie
+            titleElement.innerHTML = results[i].original_title;
+            overviewElement.innerHTML = results[i].overview;
+
+
+
+      // Append the title element to the document body or any other desired container
+    }
 
   } catch (err) {
     // Handle errors
     console.error(err);
-  }
+}
 }
 
-
-
+getTrendingFilms();
 
 // Call the function to fetch and display trending films
-getTrendingFilms();
