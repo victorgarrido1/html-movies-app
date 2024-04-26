@@ -1,6 +1,3 @@
-// let movieTitle = document.getElementById("movie-title");
-// let movieDesc = document.getElementById("movie-description");
-
 // This section will allow us to display data to the user
 const options = {
   method: "GET",
@@ -27,32 +24,21 @@ async function getTrendingFilms() {
     // Parse response data as JSON
     const data = await response.json();
 
-    // 
-    const results = data.results
-    console.log(results)
-
-    const titleElement = document.getElementById("movie-title");
-    const overviewElement = document.getElementById("movie-description")
+    // Extract movie titles from the data
+    const movieTitles = data.results.map(movie => movie.original_title);
     
-    // Iterate through the first 6 movies and display their titles
-    for (let i = 0; i < results.length; i++) {
-      // Create a new div element for each movie title
-      console.log(results[i].original_title)
-
-
-      // Set the inner HTML of the div to the original title of the movie
-            titleElement.innerHTML = results[i].original_title;
-            overviewElement.innerHTML = results[i].overview;
-
-
-
-      // Append the title element to the document body or any other desired container
-    }
+    // Select all elements with the class "movie-title"
+    const titleElements = document.querySelectorAll(".movie-title")
+   
+    // Iterate over the title elements and update their text content
+    titleElements.forEach((titleElement, index) => {
+      titleElement.textContent = movieTitles[index] || "No title available";
+    });
 
   } catch (err) {
     // Handle errors
     console.error(err);
-}
+  }
 }
 
 getTrendingFilms();
