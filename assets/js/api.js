@@ -25,16 +25,41 @@ async function getTrendingFilms() {
     const data = await response.json();
 
     // Extract movie titles from the data
-    const movieTitles = data.results.map(movie => movie.original_title);
-    
+    console.log(data);
+    const movieTitles = data.results.map((movie) => movie.original_title);
+    const overviews = data.results.map((movie) => movie.overview);
+
+    //extract the poster from the data
+    const posterPaths = data.results.map((movie) => movie.poster_path);
+
     // Select all elements with the class "movie-title"
-    const titleElements = document.querySelectorAll(".movie-title")
-   
+    const titleElements = document.querySelectorAll(".movie-title");
+    ///select all elements with the class of  movie description
+
     // Iterate over the title elements and update their text content
     titleElements.forEach((titleElement, index) => {
       titleElement.textContent = movieTitles[index] || "No title available";
     });
 
+    const overviewElements = document.querySelectorAll(".movie-description");
+    console.log(overviewElements);
+
+    overviewElements.forEach((overviewElement, index) => {
+      overviewElement.textContent =
+        overviews[index] || "No description available";
+    });
+
+    const posterElements = document.querySelectorAll(".movie-poster");
+    console.log(posterElements);
+
+    // Iterate over posterElements and update src attribute
+    posterElements.forEach((posterElement, index) => {
+      // Construct the full URL for the poster image
+      const posterURL = `https://image.tmdb.org/t/p/w500${posterPaths[index] || ""}`;
+
+      // Update the src attribute of the current posterElement
+      posterElement.src = posterURL;
+    });
   } catch (err) {
     // Handle errors
     console.error(err);
@@ -42,5 +67,3 @@ async function getTrendingFilms() {
 }
 
 getTrendingFilms();
-
-// Call the function to fetch and display trending films
