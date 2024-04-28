@@ -1,4 +1,4 @@
-// This section will allow us to display data to the user
+// This fetch request is responsible for fetching the index.html
 const options = {
   method: "GET",
   headers: {
@@ -55,7 +55,9 @@ async function getTrendingFilms() {
     // Iterate over posterElements and update src attribute
     posterElements.forEach((posterElement, index) => {
       // Construct the full URL for the poster image
-      const posterURL = `https://image.tmdb.org/t/p/w500${posterPaths[index] || ""}`;
+      const posterURL = `https://image.tmdb.org/t/p/w500${
+        posterPaths[index] || ""
+      }`;
 
       // Update the src attribute of the current posterElement
       posterElement.src = posterURL;
@@ -67,3 +69,65 @@ async function getTrendingFilms() {
 }
 
 getTrendingFilms();
+
+//end
+//here wil will make it when the user clicks the search button their search appears
+const apiKey = "8c3a4c65c4bb1642bd1db047b0abbc0c";
+
+const searchOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${apiKey}`,
+  },
+};
+
+let searchQuery = ""; // placeholder working search //
+
+const fetchMovies = () => {
+  // Select the search button and input field elements
+  const searchMovieBtn = document.querySelector(".movie-search-btn");
+  const searchMovieInput = document.querySelector(".movie-search-input");
+
+  // Add an event listener to the search button to handle search submissions
+  searchMovieBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    // Retrieve the search query from the input field
+    const searchQuery = searchMovieInput.value.trim();
+
+    // Check if a search query is provided
+    if (searchQuery) {
+      // Construct the URL for fetching movie data based on the search query
+      const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+        searchQuery
+      )}&include_adult=false&language=en-US&page=1`;
+
+      // Fetch movie data from the API using the constructed URL and options
+      fetch(url, options)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Log or process the movie data here
+          console.log(data);
+
+          // Redirect to the search-results.html page with the search query as a query parameter
+          window.location.href = `search-results.html?query=${encodeURIComponent(
+            searchQuery
+          )}`;
+        })
+        .catch((err) => {
+          console.error("Error fetching movie data:", err);
+        });
+    } else {
+      console.error("Please enter a search query."); // Log an error message if no search query is provided
+    }
+  });
+};
+
+// Trigger the fetchMovies function to initiate movie search when the DOM is loaded
+document.addEventListener("DOMContentLoaded", fetchMovies);
