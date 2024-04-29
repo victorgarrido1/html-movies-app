@@ -71,17 +71,15 @@ getTrendingFilms();
 //End
 
 // Gets data from the DOM
+// Gets data from the DOM
+// Selecting input field and butto
+// Gets data from the DOM
 // Selecting input field and button
 let inputMovie = document.querySelector(".movie-search-input");
 let movieBtn = document.querySelector(".movie-search-btn");
 
-
-const userCardTemplate = document.querySelector("[data-user-template]");
-console.log(userCardTemplate);
-
-
 // Function to perform movie search
-async function searchMovie(query) {
+function searchMovie(query) {
   const searchOptions = {
     method: 'GET',
     headers: {
@@ -90,33 +88,16 @@ async function searchMovie(query) {
     }
   };
 
-  try {
-    // Fetch movie data from the API using async/await
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, searchOptions);
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch');
-    }
-
-    // Parse response as JSON
-    return response.json();  
-  
-    // Redirect to search-results page with the movie data
-  } catch (error) {
-    console.error(error); // Handle errors
-  }
+  // Fetch movie data from the API
+  fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, searchOptions)
+    .then(response => response.json()) // Parse response as JSON
+    .then(response => { console.log(response); }) // Log the response data to the console
+    .catch(err => console.error(err)); // Handle errors
 }
 
 // Event listener for the button click
 movieBtn.addEventListener("click", function(e) {
-
   e.preventDefault(); // Prevent default form submission behavior
-  
   const query = inputMovie.value; // Get the value typed by the user
-  
- let results = searchMovie(query);  // Call the searchMovie function with the user's query
- console.log(results);
-
-
- 
+  searchMovie(query); // Call the searchMovie function with the user's query
 });
