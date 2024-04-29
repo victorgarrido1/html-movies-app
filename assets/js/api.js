@@ -25,7 +25,7 @@ async function getTrendingFilms() {
     const data = await response.json();
 
     // Extract movie titles from the data
-    console.log(data);
+    // console.log(data);
     const movieTitles = data.results.map((movie) => movie.original_title);
     const overviews = data.results.map((movie) => movie.overview);
 
@@ -42,7 +42,6 @@ async function getTrendingFilms() {
     });
 
     const overviewElements = document.querySelectorAll(".movie-description");
-    console.log(overviewElements);
 
     overviewElements.forEach((overviewElement, index) => {
       overviewElement.textContent =
@@ -50,7 +49,6 @@ async function getTrendingFilms() {
     });
 
     const posterElements = document.querySelectorAll(".movie-poster");
-    console.log(posterElements);
 
     // Iterate over posterElements and update src attribute
     posterElements.forEach((posterElement, index) => {
@@ -70,8 +68,14 @@ async function getTrendingFilms() {
 
 getTrendingFilms();
 
-//end
-//here wil will make it when the user clicks the search button their search appears
+
+
+//End 
+
+//gets data from the DOM
+let inputMovie = document.querySelector(".movie-search-input");
+let movieBtn = document.querySelector(".movie-search-btn");
+
 const apiKey = "8c3a4c65c4bb1642bd1db047b0abbc0c";
 
 const searchOptions = {
@@ -82,52 +86,32 @@ const searchOptions = {
   },
 };
 
-let searchQuery = ""; // placeholder working search //
+const fetchMovies = (searchQuery) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+    searchQuery
+  )}&include_adult=false&language=en-US&page=1`;
 
-const fetchMovies = () => {
-  // Select the search button and input field elements
-  const searchMovieBtn = document.querySelector(".movie-search-btn");
-  const searchMovieInput = document.querySelector(".movie-search-input");
-
-  // Add an event listener to the search button to handle search submissions
-  searchMovieBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-
-    // Retrieve the search query from the input field
-    const searchQuery = searchMovieInput.value.trim();
-
-    // Check if a search query is provided
-    if (searchQuery) {
-      // Construct the URL for fetching movie data based on the search query
-      const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-        searchQuery
-      )}&include_adult=false&language=en-US&page=1`;
-
-      // Fetch movie data from the API using the constructed URL and options
-      fetch(url, options)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Log or process the movie data here
-          console.log(data);
-
-          // Redirect to the search-results.html page with the search query as a query parameter
-          window.location.href = `search-results.html?query=${encodeURIComponent(
-            searchQuery
-          )}`;
-        })
-        .catch((err) => {
-          console.error("Error fetching movie data:", err);
-        });
-    } else {
-      console.error("Please enter a search query."); // Log an error message if no search query is provided
-    }
-  });
+  fetch(url, searchOptions)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
 };
 
-// Trigger the fetchMovies function to initiate movie search when the DOM is loaded
-document.addEventListener("DOMContentLoaded", fetchMovies);
+function handleSearchFormSubmit(e) {
+  e.preventDefault();
+
+  let searchMovieQui = inputMovie.value;
+
+  if (!searchMovieQui) {
+    console.error("You need to input a value!");
+    return;
+  }
+
+  fetchMovies(searchMovieQui);
+} //base default function that allows to have button fetch data
+//TODO: rework when button is clicked the data gets sent to the search result page
+
+movieBtn.addEventListener("click", handleSearchFormSubmit);
+
+// Optionally, you can trigger the initial fetch request here if you want.
+// fetchMovies();
