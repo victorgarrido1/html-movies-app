@@ -68,50 +68,55 @@ async function getTrendingFilms() {
 
 getTrendingFilms();
 
+//End
 
-
-//End 
-
-//gets data from the DOM
+// Gets data from the DOM
+// Selecting input field and button
 let inputMovie = document.querySelector(".movie-search-input");
 let movieBtn = document.querySelector(".movie-search-btn");
 
-const apiKey = "8c3a4c65c4bb1642bd1db047b0abbc0c";
 
-const searchOptions = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${apiKey}`,
-  },
-};
+const userCardTemplate = document.querySelector("[data-user-template]");
+console.log(userCardTemplate);
 
-const fetchMovies = (searchQuery) => {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
-    searchQuery
-  )}&include_adult=false&language=en-US&page=1`;
 
-  fetch(url, searchOptions)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.error(err));
-};
+// Function to perform movie search
+async function searchMovie(query) {
+  const searchOptions = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzNhNGM2NWM0YmIxNjQyYmQxZGIwNDdiMGFiYmMwYyIsInN1YiI6IjY1Njk3ZjVjZWVlMTg2MDBhZTYzNmI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IwECgYGXPKl2a4YxM9NGuyM-TIDJOXXpJSlaeQz6NL4'
+    }
+  };
 
-function handleSearchFormSubmit(e) {
-  e.preventDefault();
+  try {
+    // Fetch movie data from the API using async/await
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, searchOptions);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
 
-  let searchMovieQui = inputMovie.value;
-
-  if (!searchMovieQui) {
-    console.error("You need to input a value!");
-    return;
+    // Parse response as JSON
+    return response.json();  
+  
+    // Redirect to search-results page with the movie data
+  } catch (error) {
+    console.error(error); // Handle errors
   }
+}
 
-  fetchMovies(searchMovieQui);
-} //base default function that allows to have button fetch data
-//TODO: rework when button is clicked the data gets sent to the search result page
+// Event listener for the button click
+movieBtn.addEventListener("click", function(e) {
 
-movieBtn.addEventListener("click", handleSearchFormSubmit);
+  e.preventDefault(); // Prevent default form submission behavior
+  
+  const query = inputMovie.value; // Get the value typed by the user
+  
+ let results = searchMovie(query);  // Call the searchMovie function with the user's query
+ console.log(results);
 
-// Optionally, you can trigger the initial fetch request here if you want.
-// fetchMovies();
+
+ 
+});
