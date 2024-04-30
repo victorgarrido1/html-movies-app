@@ -17,36 +17,28 @@
 
 <body>
     <h3>hello movies</h3>
-    <div class="box">
-        <div class="container mx-auto">
-            <div class="flex size-48">
-                <div class="size-48">
-                    <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
-                        <div
-                            class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
-                            <img class="movie-poster-search" src="" alt="poster_path" />
-                        </div>
-                        <div class="p-6">
-                            <h5 class="movie-title-search text-xl font-semibold text-blue-gray-900">
-                                Movie title
-                            </h5>
-                            <p class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
-                                movie descrip
-                            </p>
-                        </div>
-                        <div class="p-6 pt-0">
-                            <button
-                                class="font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-                                type="button">
-                                Read More
-                            </button>
-                        </div>
+<div id="movie-results-container" class="box">
+    <div class="container mx-auto">
+        <div class="flex size-48">
+            <div class="size-48">
+                <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
+                    <div class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+                        <img class="movie-poster-search" src="" alt="poster_path" />
+                    </div>
+                    <div class="p-6">
+                        <h5 class="movie-title-search text-xl font-semibold text-blue-gray-900">
+                            ${singleMovie.title}
+                        </h5>
+                        <p class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
+                            ${singleMovie.overview}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-    
 
         <a href="./index.html" class="btn btn-block btn-danger">&larr; Go back.</a>
 
