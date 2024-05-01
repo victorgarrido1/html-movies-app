@@ -79,76 +79,44 @@ const renderMovieDetails = async (movieId) => {
   try {
     // Fetch details of the single movie
     const singleMovie = await getMovie(movieId);
-    console.log(singleMovie)
 
     // Create HTML elements to display movie details
     const rootNode = document.createElement("div");
     rootNode.innerHTML = `
-    <div id="movie-results-container" class="box">
-    <div class="container mx-auto">
+    <div id='movie-details-link' class="box">
+      <div class="container mx-auto">
         <div class="flex size-48">
-            <div class="size-48">
-                <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
-                    <div class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
-                    <img class="movie-poster-search" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}" alt="poster_path"/>    
-                    </div>
-                    <div class="p-6">
-                        <h5 class="movie-title-search text-xl font-semibold text-blue-gray-900">
-                            ${singleMovie.title}
-                        </h5>
-                        <p class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
-                            ${singleMovie.overview}
-                        </p>
-                    </div>
-                </div>
+          <div class="size-48">
+            <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
+              <div class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+                <img class="movie-poster-search" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}" alt="poster_path" />
+              </div>
+              <div class="p-6">
+                <h5 class="movie-title-search text-xl font-semibold text-blue-gray-900">
+                  ${singleMovie.title}
+                </h5>
+                <p class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
+                  ${singleMovie.overview}
+                </p>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>`;
+      </div>
+    </div>`;
 
-   // Append the movie details to the DOM
-   document.getElementById("movie-details-container").appendChild(rootNode);
+    // Append the movie details to the document body
+    document.body.appendChild(rootNode);
   } catch (error) {
-    console.error("Error rendering movie details:", error);
+    console.error("Error rendering movie details:", error.message);
   }
 };
+
+// Example usage: render details of a movie with ID 123
+renderMovieDetails(123);
+
 //TODO: Need to work on inplement on trying to get thee on  result to appear once the learned more is clicked
 //Git push //Work around here 
-
-//apply an event listen for the search result 
-document.getElementById("movie-container").addEventListener("click", function (event) {
-  //check if the clicked element is a s
-})
-
-// // Event listener for the search results
-// document.getElementById("movie-container").addEventListener("click", function(event) {
-//   // Check if the clicked element is a search result
-//   if (event.target && event.target.matches(".search-result")) {
-//     // Get the movie ID from the clicked element
-//     const movieId = event.target.dataset.movieId;
-//     // Render the details of the clicked movie
-//     renderMovieDetails(movieId);
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -185,7 +153,20 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     //now we want to create new element to the DOM
     document.getElementById("movie-container").append(rootNode); //there is an null error
   });
+
+  //add event listener to handle a click on  movie details link
+  const movieDetailsLinks = document.querySelectorAll('.movie-details-link');
+  movieDetailsLinks.forEach(link => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault(); //prevent default link behavior
+      const movieId = link.dataset.movieId;
+      window.location.href = `details.html?id=${movieId}`
+    })
+  })
 });
+
+
+
 
 // Gets data from the DOM
 // Selecting input field and button
