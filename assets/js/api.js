@@ -41,8 +41,6 @@ const getMovies = async (query = null, options = {}) => {
     throw error; // Rethrow the error for handling outside this function
   }
 };
-/// STOP HERE!
-
 
 const singleOptions = {
   method: "GET",
@@ -112,11 +110,32 @@ const renderMovieDetails = async (movieId) => {
   }
 };
 
-// Example usage: render details of a movie with ID 123
-renderMovieDetails(123);
 
-//TODO: Need to work on inplement on trying to get thee on  result to appear once the learned more is clicked
-//Git push //Work around here 
+document.addEventListener("DOMContentLoaded", async () => {
+  // Retrieve the movie ID from the URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const movieId = urlParams.get("id");
+
+  if (movieId) {
+    try {
+      // Fetch movie details using the movie ID
+      const singleMovie = await getMovie(movieId);
+      console.log(singleMovie);
+
+      // Populate the HTML elements with movie details
+      document.getElementById("movie-title").textContent = singleMovie.title;
+      document.getElementById("movie-description").textContent =
+        singleMovie.overview;
+      document.getElementById(
+        "movie-poster"
+      ).src = `https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}`;
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
+    }
+  } else {
+    console.error("No movie ID found in URL parameters.");
+  }
+});
 
 
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -141,32 +160,24 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             </p>
           </div>
           <div class="p-6 pt-0">
-            <a href="details.html?id=${item.id}"
-              class="font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-              type="button">
-              Learn more
-            </a>
-          </div>
+          <a href="details.html?id=${item.id}" class="font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none learn-more-button" data-movie-id="${item.id}" type="button">Learn more</a>
       </div>
-    </div>`;
-    console.log(item.id);
+      `;
+
     //now we want to create new element to the DOM
     document.getElementById("movie-container").append(rootNode); //there is an null error
   });
 
   //add event listener to handle a click on  movie details link
-  const movieDetailsLinks = document.querySelectorAll('.movie-details-link');
-  movieDetailsLinks.forEach(link => {
+  const movieDetailsLinks = document.querySelectorAll(".learn-more-button");
+  movieDetailsLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault(); //prevent default link behavior
       const movieId = link.dataset.movieId;
-      window.location.href = `details.html?id=${movieId}`
-    })
-  })
+      window.location.href = `details.html?id=${movieId}`;
+    });
+  });
 });
-
-
-
 
 // Gets data from the DOM
 // Selecting input field and button
@@ -190,10 +201,10 @@ movieBtn.addEventListener("click", async function (e) {
   const query = inputMovie.value; // Get the value typed by the user
 
   let results = await getMovies(query);
+  console.log(results);
 
   document.getElementById("movie-container").innerHTML = "";
 
-  //extract the movie RESULTS FROM the data
 
   results.results.forEach((item) => {
     //convert item into the html element
@@ -223,6 +234,7 @@ movieBtn.addEventListener("click", async function (e) {
   </div>
 </div>
 `;
+
     //now we want to create new element to the DOM
     document.getElementById("movie-container").append(rootNode);
   });

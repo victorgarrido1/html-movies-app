@@ -1,13 +1,37 @@
-## Movie Application
+## Trending Movies And More
 
----Work in Progress ---
-The MVP is to use  a Move API to display to trending movie data for a user 
-see.
+This application allows you to view and see a expansive list of popular movies and click on on each movie title to be presented with additional information relating to the movie. The application does also have a search bar so you can search a movie and see movies synopsis and more.
 
-The main goal is to display at least 6 movies and once we get data then we can work on more functionality
 
-[x] base template of movie title, description and poster done! yaay!
-[] to work on styling the site and make it more themed 
-[] add more relative content to header and button to search results 
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FON6yRbkaWClHfTAr8chRF7%2FMovie-Webpage-Template%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DyfjRDWaurLIqQjGJ-1" allowfullscreen></iframe>
+#### Screenshot of the Main Screen
+<img width="1560" alt="movie-app-js" src="https://github.com/victorgarrido1/html-movies-app/assets/139294878/e38e15c0-62a6-403d-8f7b-4a02978b28ca">
+
+
+As a movie enthusiast, I always thrive the chance to see whats trending in the world of films and even in todays world of streaming. You may notice that many people are presented with lots of movies as they log in their favorite streaming service of choice.
+
+## Technologies  
+* HTML
+* TailWindCSS
+* Bootstrap
+* JavaScript
+* TMDB API
+
+
+## Future Development
+
+The future road map for this application is the following:
+ * Add accessibility features to this site to make it easy for people with accessibility needs to use the site.
+
+  * Add additional descriptive information about the movie when a single movie is selected. Help to give value for the client and any one whom uses this application.
+
+
+
+## Credits
+
+This was developed by myself and had assistance with other developers whom gave me a path to helped me work more with APIs. Many online sources were used.
+
+## Questions
+Please feel free to ask questions relating this repository as I am more than happy to answer.
+Email: vgarrido009@gmail.com
+

@@ -17,37 +17,40 @@
 
 <body>
     <h3>hello movies</h3>
-<div id='movie-details-link' class="box">
-    <div class="container mx-auto">
-        <div class="flex size-48">
-            <div class="size-48">
-                <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
-                    <div class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
-                        <img class="movie-poster-search" src="" alt="poster_path" />
-                    </div>
-                    <div class="p-6">
-                        <h5 class="movie-title-search text-xl font-semibold text-blue-gray-900">
-                            ${singleMovie.title}
-                        </h5>
-                        <p class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
-                            ${singleMovie.overview}
-                        </p>
+    <!-- HTML markup for the new movie card -->
+    <div id="movie-details-card" class="box">
+        <div class="container mx-auto">
+            <div class="flex size-48">
+                <div class="size-48">
+                    <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl w-96">
+                        <div
+                            class="relative h-96 mx-6-mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+                            <img id="movie-poster" class="movie-poster-search" src="" alt="poster_path" />
+                        </div>
+                        <div class="p-6">
+                            <h5 id="movie-title" class="movie-title-search text-xl font-semibold text-blue-gray-900">
+                            </h5>
+                            <p id="movie-description"
+                                class="movie-description-search h-24 text-base font-light leading-relaxed text-inherit">
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-        <a href="./index.html" class="btn btn-block btn-danger">&larr; Go back.</a>
 
 
-        <footer class="text-center">
-            © 2024 My New Website Productions
-        </footer>
-        <!-- Script placeholder -->
-        <script src="/assets/js/api.js"></script>
+    <a href="./index.html" class="btn btn-block btn-danger">&larr; Go back.</a>
+
+
+    <footer class="text-center">
+        © 2024 My New Website Productions
+    </footer>
+    <!-- Script placeholder -->
+    <script src="/assets/js/api.js"></script>
 
 </body>
 </body>
