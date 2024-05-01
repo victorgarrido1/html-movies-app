@@ -18,6 +18,11 @@ As a movie enthusiast, I always thrive the chance to see whats trending in the w
 * TMDB API
 
 
+#### Preview of the Application.
+![movie-app-ver1-01-sml](https://github.com/victorgarrido1/html-movies-app/assets/139294878/ffc80c34-15cb-4a3a-a62b-27eedadcfcce)
+
+
+
 ## Future Development
 
 The future road map for this application is the following:
