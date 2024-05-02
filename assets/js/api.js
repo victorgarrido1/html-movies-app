@@ -230,8 +230,8 @@ movieBtn.addEventListener("click", async function (e) {
     //convert item into the html element
     const rootNode = document.createElement("div");
     rootNode.innerHTML = `
-    <div class="flex flex-row flex-wrap justify-center h-25">
-    <div class="relative flex flex-col mt-8 bg-white shadow-md rounded-xl w-96 h-96">
+    <div class="flex justify-left">
+    <div class="w-96 xl:w-full" style="margin-left: 2rem;">
     <div class="relative mx-4 -mt-6  overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
     <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path" object-fit: cover;">
   </div>
