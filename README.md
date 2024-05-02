@@ -1,11 +1,12 @@
 ## Trending Movies And More
 
-This application allows you to view and see a expansive list of popular movies and click on on each movie title to be presented with additional information relating to the movie. The application does also have a search bar so you can search a movie and see movies synopsis and more.
+This application helps you explore a wide range of popular movies with an easy-to-navigate user interface. You can click on a movie title to discover details related to the movie. The application also features a search query that allows you to search for movies based on your preferences and provides synopsis details and other information.
+
 
 
 
 #### Screenshot of the Main Screen
-<img width="1560" alt="movie-app-js" src="https://github.com/victorgarrido1/html-movies-app/assets/139294878/e38e15c0-62a6-403d-8f7b-4a02978b28ca">
+<img width="1455" alt="movie-app-js-02" src="https://github.com/victorgarrido1/html-movies-app/assets/139294878/6b9d0c45-c717-45d4-9848-82f571b4b1a1">
 
 
 As a movie enthusiast, I always thrive the chance to see whats trending in the world of films and even in todays world of streaming. You may notice that many people are presented with lots of movies as they log in their favorite streaming service of choice.
@@ -18,23 +19,25 @@ As a movie enthusiast, I always thrive the chance to see whats trending in the w
 * TMDB API
 
 
-#### Preview of the Application.
-![movie-app-ver1-01-sml](https://github.com/victorgarrido1/html-movies-app/assets/139294878/ffc80c34-15cb-4a3a-a62b-27eedadcfcce)
+#### Preview of the Application
+![movie-app-html-js-0](https://github.com/victorgarrido1/html-movies-app/assets/139294878/7e9b8505-e09c-44ed-9a33-432870d23afd)
 
 
 
 ## Future Development
 
 The future road map for this application is the following:
- * Add accessibility features to this site to make it easy for people with accessibility needs to use the site.
+* Add accessibility features to this site to make it easy for people with accessibility needs to use the site.
+* Add additional descriptive information about the movie when a single movie is selected. Help to give value for the user and any one whom uses this application.
+* Refine the UI for more profound details for the user and possibly make more use from the API.
 
-  * Add additional descriptive information about the movie when a single movie is selected. Help to give value for the client and any one whom uses this application.
 
 
 
 ## Credits
 
-This was developed by myself and had assistance with other developers whom gave me a path to helped me work more with APIs. Many online sources were used.
+This was developed by myself and received assistance from other developers who provided guidance and helped me work more with APIs. Many online sources were used
+
 
 ## Questions
 Please feel free to ask questions relating this repository as I am more than happy to answer.
