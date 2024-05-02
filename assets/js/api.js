@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
       `;
 
     //now we want to create new element to the DOM
-    document.getElementById("movie-container").append(rootNode); //there is an null error
+    document.getElementById("movie-container").append(rootNode);
   });
 
   //add event listener to handle a click on  movie details link
@@ -217,7 +217,7 @@ let movieBtn = document.querySelector(".movie-search-btn");
 
 // Event listener for the button click
 movieBtn.addEventListener("click", async function (e) {
-  e.preventDefault(); // Prevent default form submission behavior //Err in 113
+  e.preventDefault(); // Prevent default form submission behavior
   const query = inputMovie.value; // Get the value typed by the user
 
   let results = await getMovies(query);
