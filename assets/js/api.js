@@ -138,27 +138,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       const movieDetailsDiv = document.createElement("div");
       movieDetailsDiv.classList.add("container", "mx-auto");
       movieDetailsDiv.innerHTML = `
-  <div class="flex justify-left">
+
+<div class="flex justify-left">
     <div class="w-96 xl:w-full" style="margin-left: 2rem;">
-        <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl">
+        <div class="relative flex bg-blue-100 shadow-md rounded-xl xl:flex-row p-4">
             <!-- Image container -->
-            <div class="relative h-96 overflow-hidden overflow-y-visible bg-blue-gray-500/40 rounded-t-xl shadow-blue-gray-500/40 "> 
+            <div class="relative h-96 overflow-hidden overflow-y-visible bg-blue-gray-500/40 rounded-t-xl shadow-blue-gray-500/40">      
                 <img id="movie-poster" class="movie-poster-search" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}" alt="poster_path"/>
             </div>
             <!-- Text content container -->
-            <div class="p-6 flex justify-end"> <!-- Adjusted justify-end class -->
-                <div class="text-right"> <!-- Add text-right class -->
-                    <div class="movie-details w-64"> <!-- Adjust the width to w-64 (64px) -->
-                        <h5 id="movie-title" class="movie-title-search text-xl font-semibold text-blue-gray-900">${singleMovie.title}</h5>
-                        <p id="movie-description" class="movie-description-search text-base font-light leading-relaxed text-inherit">${singleMovie.overview}</p>
-                        <p>${singleMovie.runtime}</p>
-                    </div>
+            <div class="p-6 flex justify-end bg-blue-100 shadow">
+            <div class="text-right">
+                <div class="movie-details mb-4"> <!-- Added mb-4 class for margin bottom -->
+                    <h5 id="movie-title" class="movie-title-search text-2xl font-extrabold text-blue-gray-900">${singleMovie.title}</h5>
+                    <p id="movie-description" class="movie-description-search text-base font-light leading-relaxed text-inherit">${singleMovie.overview}</p>
+                    <p><strong>Movie Runtime:</strong> ${singleMovie.runtime} mins</p>
+                    <p><strong>Movie Genre:</strong> ${singleMovie.genres[0].name}</p>
+                    <p><strong>Released:</strong> ${singleMovie.release_date}</p>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-  
       `;
       // Append the movie details div to the main section of the page
       document.querySelector("main").appendChild(movieDetailsDiv);
@@ -177,8 +176,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     //convert item into the html element
     const rootNode = document.createElement("div");
     rootNode.innerHTML = `
-    <div class="flex flex-row flex-wrap justify-center">
-        <div class="relative flex flex-col mt-8 bg-white shadow-md rounded-xl w-96">
+    <div class="flex-row flex-wrap justify-center">
+        <div class="relative flex flex-col mt-8 bg-blue-100 shadow-md rounded-xl w-96">
           <div
             class="relative h-56 mx-4 mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
             <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path"/>
@@ -228,29 +227,21 @@ movieBtn.addEventListener("click", async function (e) {
 
   results.results.forEach((item) => {
     //convert item into the html element
-    const rootNode = document.createElement("div");
-    rootNode.innerHTML = `
-    <div class="flex justify-left">
-    <div class="w-96 xl:w-full" style="margin-left: 2rem;">
-    <div class="relative mx-4 -mt-6  overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
-    <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path" object-fit: cover;">
-  </div>
-      <div class="p-6">
-        <h5 class="movie-title text-xl font-semibold text-blue-gray-900">
-        ${item.original_title}
-          </h5>
-        <p class="movie-description text-base font-light leading-relaxed text-inherit">
-        ${item.overview}
-        </p>
-      </div>
-      <div class="p-6 pt-0">
-        <a href="details.html?id=${item.id}"
-          class="font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-          type="button">
-          Read More
-        </a>
-      </div>
-  </div>
+    const rootNode = document.createElement("div"); //EDIT HERE
+    rootNode.innerHTML = ` 
+    <div class="flex-row flex-wrap justify-center">
+    <div class="relative flex flex-col mt-8 bg-blue-100 shadow-md rounded-xl w-96">
+        <div class="relative h-56 mx-4 mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+            <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path">
+        </div>
+        <div class="p-6">
+            <h5 class="movie-title text-xl font-semibold text-blue-gray-900">${item.original_title}</h5>
+            <p class="movie-description text-base font-light leading-relaxed text-inherit">${item.overview}</p>
+        </div>
+        <div class="p-6 pt-0">
+            <a href="details.html?id=${item.id}" class="font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="button">Read More</a>
+        </div>
+    </div>
 </div>
 `;
 

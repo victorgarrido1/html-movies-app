@@ -23,3 +23,11 @@ a {
   color: inherit; /* Inherit color from parent */
   cursor: pointer; /* Change cursor to pointer */
 }
+
+  body {
+  background-color: #171c24;
+}
+
+.details-body-page {
+  background-color: #171c24
+}
