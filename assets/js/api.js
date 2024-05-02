@@ -8,6 +8,26 @@ const options = {
   },
 };
 
+// Function to perform movie search
+// Function to fetch movie data from the API
+const searchOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzNhNGM2NWM0YmIxNjQyYmQxZGIwNDdiMGFiYmMwYyIsInN1YiI6IjY1Njk3ZjVjZWVlMTg2MDBhZTYzNmI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IwECgYGXPKl2a4YxM9NGuyM-TIDJOXXpJSlaeQz6NL4",
+  },
+};
+
+const singleOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzNhNGM2NWM0YmIxNjQyYmQxZGIwNDdiMGFiYmMwYyIsInN1YiI6IjY1Njk3ZjVjZWVlMTg2MDBhZTYzNmI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IwECgYGXPKl2a4YxM9NGuyM-TIDJOXXpJSlaeQz6NL4",
+  },
+};
+
 const geTrendingFilms = async () => {
   try {
     const response = await fetch(
@@ -40,15 +60,6 @@ const getMovies = async (query = null, options = {}) => {
     console.error("Error fetching movies:", error);
     throw error; // Rethrow the error for handling outside this function
   }
-};
-
-const singleOptions = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzNhNGM2NWM0YmIxNjQyYmQxZGIwNDdiMGFiYmMwYyIsInN1YiI6IjY1Njk3ZjVjZWVlMTg2MDBhZTYzNmI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IwECgYGXPKl2a4YxM9NGuyM-TIDJOXXpJSlaeQz6NL4",
-  },
 };
 
 // Function to fetch details of a single movie
@@ -103,6 +114,7 @@ const renderMovieDetails = async (movieId) => {
       </div>
     </div>`;
 
+    // updated content
     // Append the movie details to the document body
     document.body.appendChild(rootNode);
   } catch (error) {
@@ -110,11 +122,11 @@ const renderMovieDetails = async (movieId) => {
   }
 };
 
-
 document.addEventListener("DOMContentLoaded", async () => {
   // Retrieve the movie ID from the URL parameters
   const urlParams = new URLSearchParams(window.location.search);
   const movieId = urlParams.get("id");
+  console.log(movieId);
 
   if (movieId) {
     try {
@@ -122,13 +134,34 @@ document.addEventListener("DOMContentLoaded", async () => {
       const singleMovie = await getMovie(movieId);
       console.log(singleMovie);
 
-      // Populate the HTML elements with movie details
-      document.getElementById("movie-title").textContent = singleMovie.title;
-      document.getElementById("movie-description").textContent =
-        singleMovie.overview;
-      document.getElementById(
-        "movie-poster"
-      ).src = `https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}`;
+      // Create a new div to hold the movie details
+      const movieDetailsDiv = document.createElement("div");
+      movieDetailsDiv.classList.add("container", "mx-auto");
+      movieDetailsDiv.innerHTML = `
+  <div class="flex justify-left">
+    <div class="w-96 xl:w-full" style="margin-left: 2rem;">
+        <div class="relative flex flex-col mt-24 bg-white shadow-md rounded-xl">
+            <!-- Image container -->
+            <div class="relative h-96 overflow-hidden overflow-y-visible bg-blue-gray-500/40 rounded-t-xl shadow-blue-gray-500/40 "> 
+                <img id="movie-poster" class="movie-poster-search" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${singleMovie.poster_path}" alt="poster_path"/>
+            </div>
+            <!-- Text content container -->
+            <div class="p-6 flex justify-end"> <!-- Adjusted justify-end class -->
+                <div class="text-right"> <!-- Add text-right class -->
+                    <div class="movie-details w-64"> <!-- Adjust the width to w-64 (64px) -->
+                        <h5 id="movie-title" class="movie-title-search text-xl font-semibold text-blue-gray-900">${singleMovie.title}</h5>
+                        <p id="movie-description" class="movie-description-search text-base font-light leading-relaxed text-inherit">${singleMovie.overview}</p>
+                        <p>${singleMovie.runtime}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+      `;
+      // Append the movie details div to the main section of the page
+      document.querySelector("main").appendChild(movieDetailsDiv);
     } catch (error) {
       console.error("Error fetching movie details:", error);
     }
@@ -136,7 +169,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("No movie ID found in URL parameters.");
   }
 });
-
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   let results = await geTrendingFilms();
@@ -148,7 +180,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     <div class="flex flex-row flex-wrap justify-center">
         <div class="relative flex flex-col mt-8 bg-white shadow-md rounded-xl w-96">
           <div
-            class="relative h-56 mx-4 -mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+            class="relative h-56 mx-4 mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
             <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path"/>
           </div>
           <div class="p-6">
@@ -184,17 +216,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 let inputMovie = document.querySelector(".movie-search-input");
 let movieBtn = document.querySelector(".movie-search-btn");
 
-// Function to perform movie search
-// Function to fetch movie data from the API
-const searchOptions = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzNhNGM2NWM0YmIxNjQyYmQxZGIwNDdiMGFiYmMwYyIsInN1YiI6IjY1Njk3ZjVjZWVlMTg2MDBhZTYzNmI0MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IwECgYGXPKl2a4YxM9NGuyM-TIDJOXXpJSlaeQz6NL4",
-  },
-};
-
 // Event listener for the button click
 movieBtn.addEventListener("click", async function (e) {
   e.preventDefault(); // Prevent default form submission behavior //Err in 113
@@ -205,17 +226,15 @@ movieBtn.addEventListener("click", async function (e) {
 
   document.getElementById("movie-container").innerHTML = "";
 
-
   results.results.forEach((item) => {
     //convert item into the html element
     const rootNode = document.createElement("div");
     rootNode.innerHTML = `
-    <div class="flex flex-row flex-wrap justify-center">
-    <div class="relative flex flex-col mt-8 bg-white shadow-md rounded-xl w-96">
-      <div
-        class="relative h-56 mx-4 -mt-6 overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
-        <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path"/>
-      </div>
+    <div class="flex flex-row flex-wrap justify-center h-25">
+    <div class="relative flex flex-col mt-8 bg-white shadow-md rounded-xl w-96 h-96">
+    <div class="relative mx-4 -mt-6  overflow-hidden bg-blue-gray-500/40 rounded-xl shadow-blue-gray-500/40">
+    <img class="movie-poster" src="https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}" alt="poster_path" object-fit: cover;">
+  </div>
       <div class="p-6">
         <h5 class="movie-title text-xl font-semibold text-blue-gray-900">
         ${item.original_title}

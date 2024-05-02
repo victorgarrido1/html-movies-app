@@ -16,3 +16,10 @@
   justify-content: center; /* Horizontally center the content */
   align-items: center; /* Vertically center the content */
 }
+
+/* Hide the default link styling */
+a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from parent */
+  cursor: pointer; /* Change cursor to pointer */
+}

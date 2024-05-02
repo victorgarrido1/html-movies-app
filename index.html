@@ -16,15 +16,19 @@
   <title>Movies App</title>
 </head>
 
-
 <body>
-  <header>
-    <div id="main-text-bar"></div>
-    <h1 id="main-page-text" style="text-align: center;"><a href="index.html">Welcome to the Movies!</a></h1>  </header>
+  <header class="mb-9"> 
+    <a href="index.html" class="block"> <!-- Add href attribute with index.html -->
+        <div id="main-text-bar"></div>
+        <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">
+            HomeLand Movies: A Collection of Movies
+        </h2>
+    </a>
+</header>
   <main>
 
     <!-- Here we have the global search button  -->
-    <form class="max-w-md mx-auto">
+    <form class="max-w-md mx-auto mb-8">
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
       <div class="relative">
         <div class="absolute inset-y-1 -left-3 flex items-center ps-3 pointer-events-none">
